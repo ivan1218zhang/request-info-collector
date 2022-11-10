@@ -1,6 +1,6 @@
-package com.zyf.request.info.collector.core.config;
+package com.zyf.request.info.collector.core.collector.config;
 
-import com.zyf.request.info.collector.core.aspect.Collector;
+import com.zyf.request.info.collector.core.collector.aspect.Collector;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;

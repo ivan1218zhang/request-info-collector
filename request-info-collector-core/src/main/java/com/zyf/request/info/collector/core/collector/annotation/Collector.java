@@ -1,4 +1,4 @@
-package com.zyf.request.info.collector.core.annotation;
+package com.zyf.request.info.collector.core.collector.annotation;
 
 import java.lang.annotation.*;
 

@@ -1,6 +1,6 @@
 package com.zyf.request.info.collector.test.demo.collector;
 
-import com.zyf.request.info.collector.core.annotation.EnableRequestInfoCollector;
+import com.zyf.request.info.collector.core.collector.annotation.EnableRequestInfoCollector;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

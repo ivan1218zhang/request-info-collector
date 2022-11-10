@@ -1,6 +1,6 @@
 package com.zyf.request.info.collector.test.demo.collector;
 
-import com.zyf.request.info.collector.core.annotation.Collector;
+import com.zyf.request.info.collector.core.collector.annotation.Collector;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

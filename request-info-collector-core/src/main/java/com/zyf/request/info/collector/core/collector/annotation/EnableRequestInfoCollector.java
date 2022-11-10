@@ -1,4 +1,4 @@
-package com.zyf.request.info.collector.core.annotation;
+package com.zyf.request.info.collector.core.collector.annotation;
 
 import com.zyf.request.info.collector.core.selector.RequestInfoCollectorSelector;
 import org.springframework.context.annotation.Import;
