@@ -1,6 +1,6 @@
 package com.zyf.request.info.collector.core.collector.annotation;
 
-import com.zyf.request.info.collector.core.selector.RequestInfoCollectorSelector;
+import com.zyf.request.info.collector.core.common.selector.RequestInfoCollectorSelector;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

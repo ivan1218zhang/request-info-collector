@@ -1,5 +1,6 @@
 package com.zyf.request.info.collector.test.demo.collector;
 
+import com.zyf.request.info.collector.core.collector.annotation.Collected;
 import com.zyf.request.info.collector.core.collector.annotation.Collector;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class TestController {
-    @Collector({"id","name"})
+    @Collector
     @RequestMapping("/test")
-    String test(){
+    String test(@Collected TestReqVO reqVO){
         return "123";
     }
     @Collector({"name"})
