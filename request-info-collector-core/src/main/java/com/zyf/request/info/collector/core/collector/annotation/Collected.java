@@ -5,8 +5,9 @@ import java.lang.annotation.*;
 /**
  * @author IvanZhang
  */
-@Target({ElementType.FIELD,ElementType.PARAMETER})
+@Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Collected {
+    String fieldName() default "";
 }

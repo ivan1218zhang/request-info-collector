@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class TestController {
-    @Collector
+    @Collector(ip = true,startTime = true,endTime = true)
     @RequestMapping("/test")
-    String test(@Collected TestReqVO reqVO){
+    String test(TestReqVO reqVO,@Collected(fieldName = "test123") String test){
         return "123";
     }
-    @Collector({"name"})
+
     @RequestMapping("/test1")
     String test1(String name){
         return "test1";

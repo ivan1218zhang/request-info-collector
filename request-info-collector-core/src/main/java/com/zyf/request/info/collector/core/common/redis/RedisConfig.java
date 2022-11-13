@@ -11,15 +11,15 @@ public class RedisConfig {
 
     private Integer database=0;
 
-    private Integer maxWait;
+    private Integer maxWait=-1;
 
-    private Integer maxActive;
+    private Integer maxActive=8;
 
-    private Integer maxIdle;
+    private Integer maxIdle=8;
 
-    private Integer minIdle;
+    private Integer minIdle=0;
 
-    private Integer timeout;
+    private Integer timeout=0;
 
     public String getAddress() {
         return address;

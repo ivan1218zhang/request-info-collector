@@ -12,6 +12,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
+import java.util.Map;
 
 /**
  * @author IvanZhang
@@ -29,7 +30,7 @@ public class RedisClient {
             configuration.setPassword(RedisPassword.of(config.getPassword()));
         }
         // 连接池配置
-        GenericObjectPoolConfig<Object> genericObjectPoolConfig = new GenericObjectPoolConfig<>();
+        GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
         genericObjectPoolConfig.setMaxTotal(config.getMaxActive());
         genericObjectPoolConfig.setMaxWaitMillis(config.getMaxWait());
         genericObjectPoolConfig.setMaxIdle(config.getMaxIdle());
@@ -58,6 +59,13 @@ public class RedisClient {
         stringObjectRedisTemplate.setHashValueSerializer(redisSerializer);
         // key haspMap序列化
         stringObjectRedisTemplate.setHashKeySerializer(redisSerializer);
+        stringObjectRedisTemplate.afterPropertiesSet();
         return stringObjectRedisTemplate;
+    }
+
+    public void put(String key, Map<String,String> map){
+        for (String propertyName: map.keySet()){
+            redisTemplate.opsForHash().put(key,propertyName,map.get(propertyName));
+        }
     }
 }

@@ -9,5 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Collector {
-    String[] value() default {""};
+    boolean ip() default false;
+    boolean startTime() default false;
+    boolean endTime() default false;
 }
