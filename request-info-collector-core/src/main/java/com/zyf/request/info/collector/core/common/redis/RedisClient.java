@@ -68,4 +68,8 @@ public class RedisClient {
             redisTemplate.opsForHash().put(key,propertyName,map.get(propertyName));
         }
     }
+
+    public RedisTemplate<String, String> getRedisTemplate() {
+        return redisTemplate;
+    }
 }

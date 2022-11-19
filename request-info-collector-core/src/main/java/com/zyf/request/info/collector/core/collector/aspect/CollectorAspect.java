@@ -90,11 +90,35 @@ public class CollectorAspect {
             data.put("startTime", String.valueOf(start));
         }
         //执行
-        Object res = proceedingJoinPoint.proceed();
+        Object res;
+        try{
+             res = proceedingJoinPoint.proceed();
+        }catch (Exception e){
+            //获取请求结束时间
+            if (collector.endTime()){
+                Long end = System.currentTimeMillis();
+                data.put("endTime",String.valueOf(end));
+            }
+            //请求失败
+            if (collector.isSuccess()){
+                data.put("isSuccess","false");
+            }
+            //执行失败去存数据
+            redisClient.put(key,data);
+            throw e;
+        }
         //获取请求结束时间
         if (collector.endTime()){
             Long end = System.currentTimeMillis();
             data.put("endTime",String.valueOf(end));
+        }
+        //请求失败
+        if (collector.isSuccess()){
+            data.put("isSuccess","false");
+        }
+        //请求失败
+        if (collector.isSuccess()){
+            data.put("isSuccess","true");
         }
         //执行成功去存数据
         redisClient.put(key,data);
