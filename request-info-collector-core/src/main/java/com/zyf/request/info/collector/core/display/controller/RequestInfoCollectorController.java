@@ -26,7 +26,7 @@ public class RequestInfoCollectorController {
         return new Resp(RespConstant.SUCCESS,requestInfoCollectorService.countFiled(url,category));
     }
     @RequestMapping("/report/field")
-    public Resp fieldReport(String field){
-        return new Resp(RespConstant.SUCCESS,requestInfoCollectorService.countUrl(field));
+    public Resp fieldReport(String field,String value){
+        return new Resp(RespConstant.SUCCESS,requestInfoCollectorService.countUrl(field,value));
     }
 }
