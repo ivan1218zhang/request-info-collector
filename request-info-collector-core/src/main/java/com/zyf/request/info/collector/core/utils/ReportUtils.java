@@ -35,14 +35,22 @@ public class ReportUtils {
             int index=0;
             while (true){
                 int left=index*2+1;
-                int right=index*2+1;
-                if (left<i&&values.get(index)>values.get(left)){
-                    swap(keys,values,index,left);
+                int right=index*2+2;
+                int indexTmp=index;
+                boolean flag=true;
+                if (left<i&&values.get(indexTmp)>values.get(left)){
+                    swap(keys,values,indexTmp,left);
                     index=left;
-                } else if (right<i&&values.get(index)>values.get(right)) {
-                    swap(keys,values,index,right);
-                    index=right;
-                }else {
+                    flag=false;
+                }
+                if (right<i&&values.get(indexTmp)>values.get(right)) {
+                    swap(keys,values,indexTmp,right);
+                    if (flag){
+                        index=right;
+                        flag=false;
+                    }
+                }
+                if (flag){
                     break;
                 }
             }
