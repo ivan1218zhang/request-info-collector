@@ -19,12 +19,14 @@ public class RequestInfoCollectorController {
 
     @RequestMapping("/api/cache")
     public Resp apiCache(){
-        System.out.println(123);
         return new Resp(RespConstant.SUCCESS,requestInfoCollectorService.getApiCache());
     }
-    @RequestMapping("/report")
-    public Resp report(String url, String category){
-        System.out.println(111);
+    @RequestMapping("/report/url")
+    public Resp urlReport(String url, String category){
         return new Resp(RespConstant.SUCCESS,requestInfoCollectorService.countFiled(url,category));
+    }
+    @RequestMapping("/report/field")
+    public Resp fieldReport(String field){
+        return new Resp(RespConstant.SUCCESS,requestInfoCollectorService.countUrl(field));
     }
 }
