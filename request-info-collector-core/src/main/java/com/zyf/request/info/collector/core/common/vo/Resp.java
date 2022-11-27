@@ -1,4 +1,4 @@
-package com.zyf.request.info.collector.core.display.vo;
+package com.zyf.request.info.collector.core.common.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
