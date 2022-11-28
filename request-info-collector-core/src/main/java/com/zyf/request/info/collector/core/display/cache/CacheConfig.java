@@ -1,10 +1,10 @@
 package com.zyf.request.info.collector.core.display.cache;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author zhangyf45
- * @date 2022/11/26 23:05
+ * @author IvanZhang
  */
 public class CacheConfig {
     Boolean defaultUrls;
@@ -13,6 +13,12 @@ public class CacheConfig {
     Set<String> urls;
     Set<String> fields;
     Set<String> fieldValues;
+
+    public CacheConfig() {
+        urls=new HashSet<>();
+        fields=new HashSet<>();
+        fieldValues=new HashSet<>();
+    }
 
     public Set<String> getUrls() {
         return urls;

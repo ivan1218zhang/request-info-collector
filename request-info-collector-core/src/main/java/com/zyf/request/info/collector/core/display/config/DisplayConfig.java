@@ -7,8 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author zhangyf45
- * @date 2022/11/27 00:08
+ * @author IvanZhang
  */
 @Configuration
 public class DisplayConfig {

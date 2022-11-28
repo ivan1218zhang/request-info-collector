@@ -4,7 +4,6 @@ import com.zyf.request.info.collector.core.collector.annotation.Collector;
 import com.zyf.request.info.collector.core.common.redis.RedisClient;
 import com.zyf.request.info.collector.core.display.cache.CacheConfig;
 import com.zyf.request.info.collector.core.display.service.CacheService;
-import com.zyf.request.info.collector.core.display.vo.SearchFieldByUrlCacheRespVO;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.SmartLifecycle;

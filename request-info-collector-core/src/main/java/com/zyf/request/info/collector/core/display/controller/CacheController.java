@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * @author zhangyf45
- * @date 2022/11/26 21:45
+ * @author IvanZhang
  */
 @RestController
 @RequestMapping("/request/info/collector/cache")
@@ -22,11 +21,11 @@ public class CacheController {
     Resp searchFieldByUrlCache(){
         return new Resp(RespConstants.SUCCESS,cacheService.getSearchFieldByUrlCacheRespVO());
     }
-    @RequestMapping("/field/filed")
+    @RequestMapping("/field/field")
     Resp searchFieldByFieldValueCache(){
         return new Resp(RespConstants.SUCCESS,cacheService.getSearchFieldByFieldCacheRespVO());
     }
-    @RequestMapping("/url/filed")
+    @RequestMapping("/url/field")
     Resp searchUrlByFieldValueCache(){
         return new Resp(RespConstants.SUCCESS,cacheService.getSearchUrlByFieldCacheRespVO());
     }

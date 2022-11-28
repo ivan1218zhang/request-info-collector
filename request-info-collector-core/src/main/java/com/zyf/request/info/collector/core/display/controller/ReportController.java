@@ -17,13 +17,13 @@ public class ReportController {
     @Resource
     private RequestInfoCollectorService requestInfoCollectorService;
 
-    @RequestMapping("/url")
-    public Resp urlReport(String url, String category){
-        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.countFiledByUrl(url,category));
+    @RequestMapping("/url/field")
+    public Resp searchUrlByField(String field, String fieldValue){
+        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.searchUrlByField(field,fieldValue));
     }
     @RequestMapping("/field/url")
-    public Resp fieldUrlReport(String field,String value){
-        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.countUrl(field,value));
+    public Resp searchFieldByUrlReport(String field,String url){
+        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.searchFieldByUrlReport(field,url));
     }
     @RequestMapping("/field/field")
     public Resp fieldFieldReport(String field,String value,String targetField){

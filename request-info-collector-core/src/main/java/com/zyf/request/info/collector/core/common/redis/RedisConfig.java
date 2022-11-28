@@ -19,7 +19,7 @@ public class RedisConfig {
 
     private Integer minIdle=0;
 
-    private Integer timeout=0;
+    private Integer timeout=10;
 
     public String getAddress() {
         return address;

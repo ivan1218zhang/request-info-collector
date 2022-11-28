@@ -26,14 +26,9 @@ public class TestConfig {
     @Bean
     public CacheConfig cacheConfig(){
         CacheConfig cacheConfig=new CacheConfig();
-        SearchFieldByUrlCacheRespVO searchFieldByUrlCacheRespVO=new SearchFieldByUrlCacheRespVO();
-        Set<String> fields=new HashSet<>();
-        fields.add("name");
-        Set<String> urls=new HashSet<>();
-        urls.add("/test");
-        searchFieldByUrlCacheRespVO.setFields(fields);
-        searchFieldByUrlCacheRespVO.setUrls(urls);
-        cacheConfig.setSearchFieldByUrlCacheRespVO(searchFieldByUrlCacheRespVO);
+        cacheConfig.setDefaultUrls(true);
+        cacheConfig.setDefaultFields(true);
+        cacheConfig.setDefaultFieldValues(true);
         return cacheConfig;
     }
 }

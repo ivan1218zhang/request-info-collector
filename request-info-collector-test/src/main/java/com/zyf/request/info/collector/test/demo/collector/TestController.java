@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class TestController {
-    @Collector(ip = true,startTime = true,endTime = true, isSuccess = true,defaultCategories = true)
+    @Collector(ip = true,startTime = true,endTime = true, isSuccess = true)
     @RequestMapping("/test")
     String test(TestReqVO reqVO,@Collected(fieldName = "test123") String test){
         return "123";
