@@ -1,15 +1,13 @@
 package com.zyf.request.info.collector.core.display.service;
 
 import com.zyf.request.info.collector.core.common.redis.RedisClient;
+import com.zyf.request.info.collector.core.display.vo.ReportReqVO;
 import com.zyf.request.info.collector.core.display.vo.ReportRespVO;
 import com.zyf.request.info.collector.core.utils.ReportUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author IvanZhang
@@ -20,9 +18,13 @@ public class RequestInfoCollectorService {
     @Resource
     private RedisClient redisClient;
 
-    public ReportRespVO searchUrlByField(String field, String value) {
+    public ReportRespVO searchUrlByFieldReport(ReportReqVO requestVO) {
         ReportRespVO respVO=new ReportRespVO();
-        if (value==null){
+        if (requestVO.getFields()==null||requestVO.getFieldValues()==null){
+            respVO.setTotal(0);
+            return respVO;
+        }
+        if (requestVO.getFields().size()!=requestVO.getFieldValues().size()){
             respVO.setTotal(0);
             return respVO;
         }
@@ -35,8 +37,19 @@ public class RequestInfoCollectorService {
         }
         Integer count=0;
         for (String key:keys){
-            String v= (String) redisTemplate.opsForHash().get(key,field);
-            if (!value.equals(v)){
+            Iterator<String> fieldIterator=requestVO.getFields().iterator();
+            Iterator<String> valueIterator=requestVO.getFieldValues().iterator();
+            Boolean flag = false;
+            while (fieldIterator.hasNext()&& valueIterator.hasNext()){
+                String field = fieldIterator.next();
+                String value = valueIterator.next();
+                String v= (String) redisTemplate.opsForHash().get(key,field);
+                if (!value.equals(v)){
+                    flag=true;
+                    break;
+                }
+            }
+            if (flag){
                 continue;
             }
             count++;
@@ -49,21 +62,25 @@ public class RequestInfoCollectorService {
         respVO.setTotal(count);
         ArrayList<String> labels=new ArrayList<>(res.keySet());
         ArrayList<Integer> values=new ArrayList<>(res.values());
-        ReportUtils.sort(labels,values);
+        ReportUtils.sortDesc(labels,values);
         //截取出现次数最多的前十个
         if (labels.size()>10){
-            respVO.setLabels(labels.subList(0,10));
-            respVO.setValues(values.subList(0,10));
-        }else {
-            respVO.setLabels(labels);
-            respVO.setValues(values);
+            labels = new ArrayList<>(labels.subList(0,10));
+            values = new ArrayList<>(values.subList(0,10));
         }
+        ReportUtils.sortAsc(labels,values);
+        respVO.setValues(values);
+        respVO.setLabels(labels);
         return respVO;
     }
 
-    public ReportRespVO countFiledByField(String field, String value, String targetField) {
+    public ReportRespVO searchFieldByFieldReport(ReportReqVO requestVO) {
         ReportRespVO respVO=new ReportRespVO();
-        if (value==null){
+        if (requestVO.getFields()==null||requestVO.getFieldValues()==null||requestVO.getTargetField()==null){
+            respVO.setTotal(0);
+            return respVO;
+        }
+        if (requestVO.getFields().size()!=requestVO.getFieldValues().size()){
             respVO.setTotal(0);
             return respVO;
         }
@@ -76,12 +93,23 @@ public class RequestInfoCollectorService {
         }
         Integer count=0;
         for (String key:keys){
-            String v= (String) redisTemplate.opsForHash().get(key,field);
-            if (!value.equals(v)){
+            Iterator<String> fieldIterator=requestVO.getFields().iterator();
+            Iterator<String> valueIterator=requestVO.getFieldValues().iterator();
+            Boolean flag = false;
+            while (fieldIterator.hasNext()&& valueIterator.hasNext()){
+                String field = fieldIterator.next();
+                String value = valueIterator.next();
+                String v= (String) redisTemplate.opsForHash().get(key,field);
+                if (!value.equals(v)){
+                    flag=true;
+                    break;
+                }
+            }
+            if (flag){
                 continue;
             }
             count++;
-            String targetValue=(String) redisTemplate.opsForHash().get(key,targetField);
+            String targetValue=(String) redisTemplate.opsForHash().get(key,requestVO.getTargetField());
             if (targetValue==null){
                 continue;
             }
@@ -90,22 +118,22 @@ public class RequestInfoCollectorService {
         respVO.setTotal(count);
         ArrayList<String> labels=new ArrayList<>(res.keySet());
         ArrayList<Integer> values=new ArrayList<>(res.values());
-        ReportUtils.sort(labels,values);
+        ReportUtils.sortDesc(labels,values);
         //截取出现次数最多的前十个
         if (labels.size()>10){
-            respVO.setLabels(labels.subList(0,10));
-            respVO.setValues(values.subList(0,10));
-        }else {
-            respVO.setLabels(labels);
-            respVO.setValues(values);
+            labels = new ArrayList<>(labels.subList(0,10));
+            values = new ArrayList<>(values.subList(0,10));
         }
+        ReportUtils.sortAsc(labels,values);
+        respVO.setValues(values);
+        respVO.setLabels(labels);
         return respVO;
     }
 
-    public ReportRespVO searchFieldByUrlReport(String field, String url) {
+    public ReportRespVO searchFieldValueByUrlReport(ReportReqVO requestVO) {
         ReportRespVO respVO=new ReportRespVO();
         RedisTemplate<String,String> redisTemplate=redisClient.getRedisTemplate();
-        Set<String> keys=redisTemplate.keys("REQUEST:"+url+":*");
+        Set<String> keys=redisTemplate.keys("REQUEST:"+requestVO.getUrl()+":*");
         Map<String,Integer> res=new HashMap<>();
         if (keys==null){
             respVO.setTotal(0);
@@ -113,7 +141,7 @@ public class RequestInfoCollectorService {
         }
         respVO.setTotal(keys.size());
         for (String key:keys){
-            String value= (String) redisTemplate.opsForHash().get(key,field);
+            String value= (String) redisTemplate.opsForHash().get(key,requestVO.getTargetField());
             if (value==null){
                 continue;
             }
@@ -121,15 +149,15 @@ public class RequestInfoCollectorService {
         }
         ArrayList<String> labels=new ArrayList<>(res.keySet());
         ArrayList<Integer> values=new ArrayList<>(res.values());
-        ReportUtils.sort(labels,values);
+        ReportUtils.sortDesc(labels,values);
         //截取出现次数最多的前十个
         if (labels.size()>10){
-            respVO.setLabels(labels.subList(0,10));
-            respVO.setValues(values.subList(0,10));
-        }else {
-            respVO.setLabels(labels);
-            respVO.setValues(values);
+            labels = new ArrayList<>(labels.subList(0,10));
+            values = new ArrayList<>(values.subList(0,10));
         }
+        ReportUtils.sortAsc(labels,values);
+        respVO.setValues(values);
+        respVO.setLabels(labels);
         return respVO;
     }
 }

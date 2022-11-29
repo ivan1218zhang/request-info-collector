@@ -1,26 +1,21 @@
 package com.zyf.request.info.collector.test.demo.collector;
 
 import com.zyf.request.info.collector.core.collector.vo.CollectedVO;
-import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author IvanZhang
+ * @author zhangyf45
+ * @date 2022/11/29 00:14
  */
-@Data
-public class TestReqVO implements CollectedVO {
+public class User implements CollectedVO {
     String name;
-    String id;
 
     @Override
     public Map<String, String> getCollectedMap() {
-        Boolean newP = TestStatic.t(name);
         Map<String,String> map=new HashMap<>();
         map.put("name",name);
-        map.put("oneUserId",id);
-        map.put("newP", String.valueOf(newP));
         return map;
     }
 }

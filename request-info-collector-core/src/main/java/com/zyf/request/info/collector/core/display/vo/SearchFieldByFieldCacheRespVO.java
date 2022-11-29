@@ -7,9 +7,9 @@ import java.util.Set;
  * @author IvanZhang
  */
 public class SearchFieldByFieldCacheRespVO {
-    Set<String> fields;
-    Set<String> filedValues;
-    Set<String> targetFields;
+    private Set<String> fields;
+    private Set<String> filedValues;
+    private Set<String> targetFields;
 
     public SearchFieldByFieldCacheRespVO() {
         fields = new HashSet<>();

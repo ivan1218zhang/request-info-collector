@@ -3,6 +3,7 @@ package com.zyf.request.info.collector.core.display.controller;
 import com.zyf.request.info.collector.core.common.constant.RespConstants;
 import com.zyf.request.info.collector.core.display.service.RequestInfoCollectorService;
 import com.zyf.request.info.collector.core.common.vo.Resp;
+import com.zyf.request.info.collector.core.display.vo.ReportReqVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,15 +19,15 @@ public class ReportController {
     private RequestInfoCollectorService requestInfoCollectorService;
 
     @RequestMapping("/url/field")
-    public Resp searchUrlByField(String field, String fieldValue){
-        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.searchUrlByField(field,fieldValue));
+    public Resp searchUrlByFieldReport(ReportReqVO requestVO){
+        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.searchUrlByFieldReport(requestVO));
     }
     @RequestMapping("/field/url")
-    public Resp searchFieldByUrlReport(String field,String url){
-        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.searchFieldByUrlReport(field,url));
+    public Resp searchFieldValueByUrlReport(ReportReqVO requestVO){
+        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.searchFieldValueByUrlReport(requestVO));
     }
     @RequestMapping("/field/field")
-    public Resp fieldFieldReport(String field,String value,String targetField){
-        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.countFiledByField(field,value,targetField));
+    public Resp searchFieldByFieldReport(ReportReqVO requestVO){
+        return new Resp(RespConstants.SUCCESS,requestInfoCollectorService.searchFieldByFieldReport(requestVO));
     }
 }

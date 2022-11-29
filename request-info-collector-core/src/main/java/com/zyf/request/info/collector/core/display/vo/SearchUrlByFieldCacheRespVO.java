@@ -7,8 +7,8 @@ import java.util.Set;
  * @author IvanZhang
  */
 public class SearchUrlByFieldCacheRespVO {
-    Set<String> fields;
-    Set<String> fieldValues;
+    private Set<String> fields;
+    private Set<String> fieldValues;
 
     public SearchUrlByFieldCacheRespVO() {
         fields = new HashSet<>();

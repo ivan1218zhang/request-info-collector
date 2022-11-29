@@ -6,9 +6,9 @@ import java.util.List;
  * @author IvanZhang
  */
 public class ReportRespVO {
-    Integer total;
-    List<String> labels;
-    List<Integer> values;
+    private Integer total;
+    private List<String> labels;
+    private List<Integer> values;
 
     public Integer getTotal() {
         return total;
