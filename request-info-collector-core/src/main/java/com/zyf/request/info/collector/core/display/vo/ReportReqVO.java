@@ -6,17 +6,17 @@ import java.util.List;
  * @author IvanZhang
  */
 public class ReportReqVO {
-    List<String> fields;
+    List<String> fieldNames;
     List<String> fieldValues;
     String targetField;
     String url;
 
-    public List<String> getFields() {
-        return fields;
+    public List<String> getFieldNames() {
+        return fieldNames;
     }
 
-    public void setFields(List<String> fields) {
-        this.fields = fields;
+    public void setFieldNames(List<String> fieldNames) {
+        this.fieldNames = fieldNames;
     }
 
     public List<String> getFieldValues() {
@@ -46,7 +46,7 @@ public class ReportReqVO {
     @Override
     public String toString() {
         return "ReportReqVO{" +
-                "fields=" + fields +
+                "fields=" + fieldNames+
                 ", fieldValues=" + fieldValues +
                 ", targetField='" + targetField + '\'' +
                 ", url='" + url + '\'' +

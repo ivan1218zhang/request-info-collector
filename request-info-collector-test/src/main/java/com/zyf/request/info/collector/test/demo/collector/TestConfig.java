@@ -18,9 +18,9 @@ public class TestConfig {
     @Bean
     public RedisClient test(){
         RedisConfig redisConfig=new RedisConfig();
-        redisConfig.setAddress("192.168.233.123");
+        redisConfig.setAddress("localhost");
         redisConfig.setPort(6379);
-        redisConfig.setPassword("3333");
+        redisConfig.setPassword("");
         return RedisClient.create(redisConfig);
     }
     @Bean

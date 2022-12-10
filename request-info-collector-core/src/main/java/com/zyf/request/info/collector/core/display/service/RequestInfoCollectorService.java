@@ -20,11 +20,11 @@ public class RequestInfoCollectorService {
 
     public ReportRespVO searchUrlByFieldReport(ReportReqVO requestVO) {
         ReportRespVO respVO=new ReportRespVO();
-        if (requestVO.getFields()==null||requestVO.getFieldValues()==null){
+        if (requestVO.getFieldNames()==null||requestVO.getFieldValues()==null){
             respVO.setTotal(0);
             return respVO;
         }
-        if (requestVO.getFields().size()!=requestVO.getFieldValues().size()){
+        if (requestVO.getFieldNames().size()!=requestVO.getFieldValues().size()){
             respVO.setTotal(0);
             return respVO;
         }
@@ -37,9 +37,9 @@ public class RequestInfoCollectorService {
         }
         Integer count=0;
         for (String key:keys){
-            Iterator<String> fieldIterator=requestVO.getFields().iterator();
+            Iterator<String> fieldIterator=requestVO.getFieldNames().iterator();
             Iterator<String> valueIterator=requestVO.getFieldValues().iterator();
-            Boolean flag = false;
+            boolean flag = false;
             while (fieldIterator.hasNext()&& valueIterator.hasNext()){
                 String field = fieldIterator.next();
                 String value = valueIterator.next();
@@ -76,11 +76,11 @@ public class RequestInfoCollectorService {
 
     public ReportRespVO searchFieldByFieldReport(ReportReqVO requestVO) {
         ReportRespVO respVO=new ReportRespVO();
-        if (requestVO.getFields()==null||requestVO.getFieldValues()==null||requestVO.getTargetField()==null){
+        if (requestVO.getFieldNames()==null||requestVO.getFieldValues()==null||requestVO.getTargetField()==null){
             respVO.setTotal(0);
             return respVO;
         }
-        if (requestVO.getFields().size()!=requestVO.getFieldValues().size()){
+        if (requestVO.getFieldNames().size()!=requestVO.getFieldValues().size()){
             respVO.setTotal(0);
             return respVO;
         }
@@ -93,7 +93,7 @@ public class RequestInfoCollectorService {
         }
         Integer count=0;
         for (String key:keys){
-            Iterator<String> fieldIterator=requestVO.getFields().iterator();
+            Iterator<String> fieldIterator=requestVO.getFieldNames().iterator();
             Iterator<String> valueIterator=requestVO.getFieldValues().iterator();
             Boolean flag = false;
             while (fieldIterator.hasNext()&& valueIterator.hasNext()){
