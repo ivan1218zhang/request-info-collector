@@ -10,7 +10,15 @@ import java.util.Map;
  * @author IvanZhang
  */
 @Data
-public class TestReqVO{
-    String name;
-    String id;
+public class TestReqVO implements CollectedVO{
+    private String name;
+    private String id;
+
+    @Override
+    public Map<String, String> getCollectedMap() {
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put("name",name);
+        hashMap.put("oneUserId",id);
+        return hashMap;
+    }
 }

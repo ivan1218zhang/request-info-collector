@@ -56,7 +56,11 @@ public class CollectorAspect {
             if (param instanceof CollectedVO){
                 Map<String,String> hashMap = ((CollectedVO) param).getCollectedMap();
                 for(String k:hashMap.keySet()){
-                    if (data.put(k,hashMap.get(k))!=null){
+                    String v = hashMap.get(k);
+                    if (v==null){
+                        v="";
+                    }
+                    if (data.put(k,v)!=null){
                         throw new FiledNameException(k);
                     }
                 }
